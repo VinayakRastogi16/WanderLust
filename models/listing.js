@@ -14,47 +14,69 @@ const listingSchema = new Schema({
   description: String,
 
   image: {
-    filename :String,
-    url: String,
-    
+    filename: String,
+    url: String
   },
   price: {
-    type:Number,
-    required:true,
-    min:0,
+    type: Number,
+    required: true,
+    min: 0,
   },
   location: String,
   country: String,
+  
+  leads:[{
+    type:Schema.Types.ObjectId,
+    ref:"Lead",
+  }],
 
-  reviews: [{
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
+  owner: {
     type: Schema.Types.ObjectId,
-    ref:"Review"
- }],
- owner :{
-  type : Schema.Types.ObjectId,
-  ref : "User"
- },
- geometry: {
-  type: {
-    type: String,
-    enum: ["Point"],
-    required: true
+    ref: "User",
   },
-  coordinates: {
-    type: [Number], // [lng, lat]
-    required: true
-  }
-}
-
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number], // [lng, lat]
+      required: true,
+    },
+  },
+  tags: [
+      {
+        type: String,
+        enum: [
+          "Rooms",
+          "Iconic Cities",
+          "Mountains",
+          "Lakefront",
+          "Amazing Pools",
+          "Amazing Views",
+          "Beach",
+          "Castles",
+          "Cabin",
+          "Camp",
+          "Farms",
+          "Snow",
+        ],
+      },
+    ],
 });
 
-listingSchema.post("findOneAndDelete", async (listing)=>{
-
-  if(listing){
-    await Review.deleteMany({_id: {$in:listing.reviews}});
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
-  
-})
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 export default Listing;

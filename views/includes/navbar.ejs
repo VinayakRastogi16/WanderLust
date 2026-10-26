@@ -10,7 +10,7 @@
     background-color: #fe424d;
     color: #f2f2f2;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    padding: 0rem 1rem 0rem 1rem;
   }
 
   .search-btn:hover{
@@ -26,7 +26,8 @@
 
   .search-input{
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    cursor:text;
     font-size: 1rem;
 
   }
@@ -44,12 +45,6 @@
         <a class="nav-link" href="/listings">Explore</a>
       </div>
       <div class="navbar-nav ms-auto">
-<<<<<<< HEAD
-        <form class="d-flex" role="search">
-        <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" />
-        <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-      </form>
-=======
         <form class="d-flex" role="search" method="get" action="/listings">
           <% if (typeof minPrice !== "undefined" && minPrice !== ""){ %>
             <input type="hidden" name="minPrice" value="<%= minPrice %>">
@@ -60,8 +55,8 @@
           <% } %>
 
           <% if (typeof selectedCategory !== "undefined" && selectedCategory) { %>
-            <input type="hidden" name="category" value="<%= selectedCategory %>">
-          <% } %>
+  <input type="hidden" name="category" value="<%= selectedCategory %>">
+<% } %>
 
           <% if (typeof sort !== "undefined" && sort) { %>
             <input type="hidden" name="sort" value="<%= sort %>">
@@ -69,10 +64,10 @@
           <input class="form-control me-2 search-input" name="search" type="search" placeholder="Search destinations" value="<%= typeof search !== 'undefined'? search: '' %>"/>
           <button class="btn hover-lift search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
         </form>
->>>>>>> a8a3274 (Fix)
       </div>
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <a class="nav-link" href="/leads/lead-form">Get Notified</a>
 
         <% if(!currUser) {%>
         <a class="nav-link" href="/signup"><b>Sign Up</b></a>
